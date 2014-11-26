@@ -34,3 +34,25 @@
 
     part2(S) :- street([], [], [], S, []).
 
+% part 3
+
+	/* Write a DCG that given a non-negative integer Sum, accepts lists of integers
+	≥ 1 that add up to Sum. For example,
+
+	| ?- s(3,L,[]).
+	L = [3] ? ;
+	L = [2,1] ? ;
+	L = [1,2] ? ;
+	L = [1,1,1] ? ;
+	no
+
+	It may be useful to write a predicate mkList(+Num,?List) that returns a list
+	List of integers from Num down to 1. For example,
+
+	| ?- mkList(3,L).
+	L = [3,2,1] ? ;
+	no
+
+	*/
+
+	
