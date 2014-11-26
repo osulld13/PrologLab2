@@ -16,7 +16,7 @@
 
 % part 2
 
-	street(A, I, X) --> col(A, B) , nat(I, J), pet(X, Y), 
+	s(A, I, X) --> col(A, B) , nat(I, J), pet(X, Y), 
 						col(B, C), nat(J, K), pet(Y, Z), 
 						col(C, _), nat(K, _), pet(Z, _).
 
@@ -32,7 +32,7 @@
 	pet(X, Y) --> {not(member(snail, X))}, [snail], {append([snail], X, Y)}.
 	pet(X, Y) --> {not(member(zebra, X))}, [zebra], {append([zebra], X, Y)}.
 
-    part2(S) :- street([], [], [], S, []).
+    part2(S) :- s([], [], [], S, []).
 
 % part 3
 
@@ -55,4 +55,24 @@
 
 	*/
 
+	/*s(Sum) --> {Sum > 0}, l(0, _, Result).
 	
+	l([I|L], Accum1, Accum2, Result)--> {I >= 1}, {Accum2 is Accum1 + I},  */   
+
+	%use reverse of list is element function to get term.
+
+	%, 
+
+	s(Sum) --> {Sum > 0}, {mkList(Sum, L)},  l(L, Result), {Result =:= Sum}.
+	
+	l(_, 0) --> [].
+	l(L, Accum1) --> {member(X, L)}, [X], l(L, Accum2), {Accum1 is Accum2 + X}.
+
+
+	mkList(S, L) :- mkList1(S, [], L).
+
+    mkList1(1, L, L).
+	mkList1(S, L, X) :- S2 is S - 1, mkList1(S2, [S2|L], X).
+
+
+	part3(Sum, L) :- s(Sum, L, []).
