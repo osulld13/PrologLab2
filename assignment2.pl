@@ -20,4 +20,19 @@
 
 % part 2
 
-	/**/
+	street(X) --> col(X, Y) , nat, pet, col(Y, Z), nat, pet, col(Z, _), nat, pet.
+
+        col(X, Y) --> {not(member(red, X))}, [red], {append([red], X, Y)}.
+        col(X, Y) --> {not(member(blue, X))}, [blue], {append([blue], X, Y)}.
+        col(X, Y) --> {not(member(green, X))}, [green], {append([green], X, Y)}.
+
+        nat --> [english].
+        nat --> [spanish].
+        nat --> [japanese].
+
+        pet --> [jaguar].
+        pet --> [snail].
+        pet --> [zebra].
+
+        part2(S) :- street([], S, []).
+
