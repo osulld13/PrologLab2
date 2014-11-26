@@ -63,16 +63,14 @@
 
 	%, 
 
-	s(Sum) --> {Sum > 0}, {mkList(Sum, L)},  l(L, Result), {Result =:= Sum}.
+	s(Sum) --> {Sum > 0}, {mkList(Sum, L)},  l(L, 0, Sum, Result), {Result =:= Sum}.
 	
-	l(_, 0) --> [].
-	l(L, Accum1) --> {member(X, L)}, [X], l(L, Accum2), {Accum1 is Accum2 + X}.
-
+	l(L, Accum1, Sum, Result) --> {member(X, L)}, [X],{Accum2 is Accum1 + X}, {Accum2 =< Sum}, l(L, Accum2, Sum, Result).
+	l(_, Accum, _, Accum) --> [].
 
 	mkList(S, L) :- mkList1(S, [], L).
 
-    mkList1(1, L, L).
-	mkList1(S, L, X) :- S2 is S - 1, mkList1(S2, [S2|L], X).
-
+    mkList1(0, L, L1) :- reverse(L, L1).
+	mkList1(S, L, X) :- S2 is S - 1, S2 >= 0, mkList1(S2, [S|L], X).
 
 	part3(Sum, L) :- s(Sum, L, []).
