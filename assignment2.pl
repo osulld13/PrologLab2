@@ -36,33 +36,6 @@
 
 % part 3
 
-	/* Write a DCG that given a non-negative integer Sum, accepts lists of integers
-	≥ 1 that add up to Sum. For example,
-
-	| ?- s(3,L,[]).
-	L = [3] ? ;
-	L = [2,1] ? ;
-	L = [1,2] ? ;
-	L = [1,1,1] ? ;
-	no
-
-	It may be useful to write a predicate mkList(+Num,?List) that returns a list
-	List of integers from Num down to 1. For example,
-
-	| ?- mkList(3,L).
-	L = [3,2,1] ? ;
-	no
-
-	*/
-
-	/*s(Sum) --> {Sum > 0}, l(0, _, Result).
-	
-	l([I|L], Accum1, Accum2, Result)--> {I >= 1}, {Accum2 is Accum1 + I},  */   
-
-	%use reverse of list is element function to get term.
-
-	%, 
-
 	s(Sum) --> {Sum > 0}, {mkList(Sum, L)},  l(L, 0, Sum, Result), {Result =:= Sum}.
 	
 	l(L, Accum1, Sum, Result) --> {member(X, L)}, [X],{Accum2 is Accum1 + X}, {Accum2 =< Sum}, l(L, Accum2, Sum, Result).
